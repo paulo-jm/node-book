@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /**
  * Module dependencies.
  */
@@ -89,3 +87,26 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 
+
+
+/**
+ * Test 
+ */
+
+var boot = function () {
+    server.listen(app.get('port'), function(){
+        console.info('Express server listening on port ' + app.get('port'));
+    });
+}
+var shutdown = function() {
+    server.close();
+}
+if (require.main === module) {
+    boot();
+}
+else {
+    console.info('Running app as a module')
+    exports.boot = boot;
+    exports.shutdown = shutdown;
+    exports.port = app.get('port');
+}
